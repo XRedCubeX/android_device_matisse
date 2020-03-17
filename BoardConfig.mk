@@ -1,0 +1,108 @@
+DEVICE_TREE := device/samsung/matisse
+
+# Architecture
+TARGET_ARCH := arm
+TARGET_ARCH_VARIANT := armv7-a-neon
+TARGET_CPU_VARIANT := krait
+TARGET_CPU_ABI := armeabi-v7a
+TARGET_CPU_ABI2 := armeabi
+TARGET_CPU_SMP := true
+ARCH_ARM_HAVE_TLS_REGISTER := true
+BOARD_USES_QCOM_HARDWARE := true
+
+# Binder API version
+TARGET_USES_64_BIT_BINDER := true
+
+# Board
+TARGET_BOARD_PLATFORM := msm8226
+TARGET_BOARD_PLATFORM_GPU := qcom-adreno305
+TARGET_BOOTLOADER_BOARD_NAME := MSM8226
+
+# Bootloader
+TARGET_NO_BOOTLOADER := true
+BOARD_VENDOR := samsung
+
+# Unified Device
+TARGET_UNIFIED_DEVICE       := true
+TARGET_INIT_VENDOR_LIB := libinit_msm8226
+TARGET_LIBINIT_MSM8226_DEFINES_FILE := device/samsung/matisse/init_matisse.c
+TARGET_LIBINIT_MSM8226_DEFINES_FILE := device/samsung/matisse/init_matisse.cpp
+TARGET_RECOVERY_DEVICE_MODULES := libinit_msm8226
+
+# Kernel
+TARGET_KERNEL_SOURCE := kernel/samsung/msm8226
+TARGET_KERNEL_ARCH := arm
+TARGET_KERNEL_HEADER_ARCH := arm
+BOARD_KERNEL_IMAGE_NAME := zImage-dtb
+TARGET_KERNEL_CONFIG := lineage_matisselte_defconfig
+KERNEL_TOOLCHAIN_PREFIX := arm-linux-androideabi-
+
+# Boot image
+BOARD_KERNEL_CMDLINE := console=null androidboot.hardware=qcom msm_rtb.filter=0x37 androidboot.selinux=permissive
+BOARD_KERNEL_BASE := 0x00000000
+BOARD_KERNEL_PAGESIZE := 2048
+BOARD_MKBOOTIMG_ARGS := --ramdisk_offset 0x02000000 --tags_offset 0x01e00000
+BOARD_CUSTOM_BOOTIMG_MK := $(DEVICE_TREE)/custombootimg.mk
+BOARD_KERNEL_SEPARATED_DT := true
+
+# Filesystems
+BOARD_HAS_LARGE_FILESYSTEM := true
+TARGET_USERIMAGES_USE_EXT4 := true
+TARGET_USERIMAGES_USE_F2FS := true
+BOARD_SUPPRESS_SECURE_ERASE := true
+
+# Properties
+TARGET_SYSTEM_PROP += $(DEVICE_TREE)/system.prop
+
+# Ramdisk
+LZMA_RAMDISK_TARGETS := boot,recovery
+
+# Partitions
+BOARD_BOOTIMAGE_PARTITION_SIZE := 10485760
+BOARD_RECOVERYIMAGE_PARTITION_SIZE := 10485760
+BOARD_SYSTEMIMAGE_PARTITION_SIZE := 2362232012
+BOARD_SYSTEMIMAGE_JOURNAL_SIZE := 0
+BOARD_USERDATAIMAGE_PARTITION_SIZE := 12884901888
+BOARD_CACHEIMAGE_FILE_SYSTEM_TYPE := ext4
+BOARD_CACHEIMAGE_PARTITION_SIZE := 314572800
+BOARD_FLASH_BLOCK_SIZE := 131072
+
+# Time services
+BOARD_USES_QC_TIME_SERVICES := true
+
+# TWRP
+TW_THEME := portrait_hdpi
+RECOVERY_SDCARD_ON_DATA := true
+TARGET_RECOVERY_PIXEL_FORMAT := "RGBX_8888"
+TW_BRIGHTNESS_PATH := "/sys/class/leds/lcd-backlight/brightness"
+TARGET_USE_CUSTOM_LUN_FILE_PATH := "/sys/devices/platform/msm_hsusb/gadget/lun%d/file"
+TW_MAX_BRIGHTNESS := 255
+TW_DEFAULT_BRIGHTNESS := 162
+TW_NO_REBOOT_BOOTLOADER := true
+TW_HAS_DOWNLOAD_MODE := true
+TARGET_RECOVERY_QCOM_RTC_FIX := true
+TW_MTP_DEVICE := "/dev/mtp_usb"
+TW_NO_EXFAT_FUSE := true
+TW_NO_LEGACY_PROPS := true
+
+# MultiROM config
+TARGET_RECOVERY_IS_MULTIROM := true
+MR_DEVICE_VARIANTS := matisse
+MR_DEVICE_VARIANTS := matissewifi
+MR_DEVICE_VARIANTS := matisse3g
+MR_DEVICE_VARIANTS := matisselte
+MR_DEVICE_VARIANTS := matisseue
+MR_INPUT_TYPE := type_b
+MR_INIT_DEVICES := device/samsung/matisse/multirom/mr_init_devices.c
+MR_DPI := hdpi
+MR_DPI_MUL := 1
+MR_DPI_FONT := 160
+MR_USE_MROM_FSTAB := true
+MR_FSTAB := device/samsung/matisse/recovery.fstab
+MR_ALLOW_NKK71_NOKEXEC_WORKAROUND := true
+MR_KEXEC_MEM_MIN := 0x06200000
+MR_KEXEC_DTB := true
+MR_INFOS := device/samsung/matisse/multirom/mrom_infos
+MR_DEVICE_HOOKS := device/samsung/matisse/multirom/mr_hooks.c
+MR_DEVICE_HOOKS_VER := 3
+MR_PIXEL_FORMAT := "RGBX_8888"
